@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ShardStatsValue;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -148,7 +148,7 @@ public class NodeStatsAllShardsMetricsCollector extends PerformanceAnalyzerMetri
 
     @Override
     public void collectMetrics(long startTime) {
-        IndicesService indicesService = ESResources.INSTANCE.getIndicesService();
+        IndicesService indicesService = OpenSearchResources.INSTANCE.getIndicesService();
 
         if (indicesService == null) {
             return;

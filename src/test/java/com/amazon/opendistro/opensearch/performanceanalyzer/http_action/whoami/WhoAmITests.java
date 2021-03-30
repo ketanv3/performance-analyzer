@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import java.io.IOException;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.support.ActionFilters;
@@ -61,7 +61,7 @@ public class WhoAmITests {
         WhoAmIRequestBuilder builder = new WhoAmIRequestBuilder(null);
         transportWhoAmIAction.doExecute(task, new WhoAmIRequest(), listener);
         verify(listener).onResponse(any());
-        assertEquals(indicesService, ESResources.INSTANCE.getIndicesService());
+        assertEquals(indicesService, OpenSearchResources.INSTANCE.getIndicesService());
     }
 
     @Test

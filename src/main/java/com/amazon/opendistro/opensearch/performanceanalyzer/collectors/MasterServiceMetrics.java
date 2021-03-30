@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.MasterPendingValue;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsProcessor;
@@ -54,8 +54,8 @@ public class MasterServiceMetrics extends PerformanceAnalyzerMetricsCollector
     @Override
     public void collectMetrics(long startTime) {
         try {
-            if (ESResources.INSTANCE.getClusterService() == null
-                    || ESResources.INSTANCE.getClusterService().getMasterService() == null) {
+            if (OpenSearchResources.INSTANCE.getClusterService() == null
+                    || OpenSearchResources.INSTANCE.getClusterService().getMasterService() == null) {
                 return;
             }
 
@@ -64,7 +64,7 @@ public class MasterServiceMetrics extends PerformanceAnalyzerMetricsCollector
                     .append(PerformanceAnalyzerMetrics.sMetricNewLineDelimitor);
             value.append(
                     new MasterPendingStatus(
-                                    ESResources.INSTANCE
+                                    OpenSearchResources.INSTANCE
                                             .getClusterService()
                                             .getMasterService()
                                             .numberOfPendingTasks())

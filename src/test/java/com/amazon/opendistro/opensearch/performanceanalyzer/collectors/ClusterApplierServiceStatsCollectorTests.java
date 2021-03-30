@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.amazon.opendistro.opensearch.performanceanalyzer.CustomMetricsLocationTestBase;
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics;
@@ -43,7 +43,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ESResources.class})
+@PrepareForTest({OpenSearchResources.class})
 public class ClusterApplierServiceStatsCollectorTests extends CustomMetricsLocationTestBase {
     ObjectMapper mapper = new ObjectMapper();
 
@@ -108,11 +108,11 @@ public class ClusterApplierServiceStatsCollectorTests extends CustomMetricsLocat
                                 ClusterApplierServiceStatsCollector.class.getSimpleName()))
                 .thenReturn(true);
 
-        ESResources esResources = Mockito.mock(ESResources.class);
+        OpenSearchResources openSearchResources = Mockito.mock(OpenSearchResources.class);
         ClusterService clusterService = Mockito.mock(ClusterService.class);
         ClusterApplierService clusterApplierService = Mockito.mock(ClusterApplierService.class);
-        Whitebox.setInternalState(ESResources.class, "INSTANCE", esResources);
-        Mockito.when(esResources.getClusterService()).thenReturn(clusterService);
+        Whitebox.setInternalState(OpenSearchResources.class, "INSTANCE", openSearchResources);
+        Mockito.when(openSearchResources.getClusterService()).thenReturn(clusterService);
         Mockito.when(clusterService.getClusterApplierService()).thenReturn(clusterApplierService);
 
         spyCollector.collectMetrics(startTimeInMills);
@@ -163,11 +163,11 @@ public class ClusterApplierServiceStatsCollectorTests extends CustomMetricsLocat
                                 ClusterApplierServiceStatsCollector.class.getSimpleName()))
                 .thenReturn(true);
 
-        ESResources esResources = Mockito.mock(ESResources.class);
+        OpenSearchResources openSearchResources = Mockito.mock(OpenSearchResources.class);
         ClusterService clusterService = Mockito.mock(ClusterService.class);
         ClusterApplierService clusterApplierService = Mockito.mock(ClusterApplierService.class);
-        Whitebox.setInternalState(ESResources.class, "INSTANCE", esResources);
-        Mockito.when(esResources.getClusterService()).thenReturn(clusterService);
+        Whitebox.setInternalState(OpenSearchResources.class, "INSTANCE", openSearchResources);
+        Mockito.when(openSearchResources.getClusterService()).thenReturn(clusterService);
         Mockito.when(clusterService.getClusterApplierService()).thenReturn(clusterApplierService);
 
         spyCollector.resetPrevClusterApplierServiceStats();
@@ -236,11 +236,11 @@ public class ClusterApplierServiceStatsCollectorTests extends CustomMetricsLocat
                                 ClusterApplierServiceStatsCollector.class.getSimpleName()))
                 .thenReturn(true);
 
-        ESResources esResources = Mockito.mock(ESResources.class);
+        OpenSearchResources openSearchResources = Mockito.mock(OpenSearchResources.class);
         ClusterService clusterService = Mockito.mock(ClusterService.class);
         ClusterApplierService clusterApplierService = Mockito.mock(ClusterApplierService.class);
-        Whitebox.setInternalState(ESResources.class, "INSTANCE", esResources);
-        Mockito.when(esResources.getClusterService()).thenReturn(clusterService);
+        Whitebox.setInternalState(OpenSearchResources.class, "INSTANCE", openSearchResources);
+        Mockito.when(openSearchResources.getClusterService()).thenReturn(clusterService);
         Mockito.when(clusterService.getClusterApplierService()).thenReturn(clusterApplierService);
 
         spyCollector.collectMetrics(startTimeInMills);

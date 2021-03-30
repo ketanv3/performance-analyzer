@@ -19,7 +19,7 @@ import static com.amazon.opendistro.opensearch.performanceanalyzer.config.Perfor
 import static org.junit.Assert.assertEquals;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.ScheduledMetricCollectorsExecutor;
 import java.nio.file.Paths;
 import org.elasticsearch.common.settings.Settings;
@@ -35,8 +35,8 @@ public class PerformanceAnalyzerControllerTests {
     public void init() {
         initMocks(this);
         settings = Settings.builder().put("path.home", "./").build();
-        ESResources.INSTANCE.setSettings(settings);
-        ESResources.INSTANCE.setConfigPath(Paths.get("build/tmp/junit_metrics"));
+        OpenSearchResources.INSTANCE.setSettings(settings);
+        OpenSearchResources.INSTANCE.setConfigPath(Paths.get("build/tmp/junit_metrics"));
         controller = new PerformanceAnalyzerController(new ScheduledMetricCollectorsExecutor());
     }
 

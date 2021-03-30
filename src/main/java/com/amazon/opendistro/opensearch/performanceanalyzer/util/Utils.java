@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.util;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.AdmissionControlMetricsCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.CacheConfigMetricsCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.CircuitBreakerCollector;
@@ -104,7 +104,7 @@ public class Utils {
 
     public static HashMap<ShardId, IndexShard> getShards() {
         HashMap<ShardId, IndexShard> shards = new HashMap<>();
-        Iterator<IndexService> indexServices = ESResources.INSTANCE.getIndicesService().iterator();
+        Iterator<IndexService> indexServices = OpenSearchResources.INSTANCE.getIndicesService().iterator();
         while (indexServices.hasNext()) {
             Iterator<IndexShard> indexShards = indexServices.next().iterator();
             while (indexShards.hasNext()) {

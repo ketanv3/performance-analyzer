@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.CacheConfigMetricsCollector.CacheMaxSizeStatus;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.CacheType;
@@ -43,7 +43,7 @@ public class CacheConfigMetricsCollectorTests extends ESSingleNodeTestCase {
     @Before
     public void init() {
         IndicesService indicesService = getInstanceFromNode(IndicesService.class);
-        ESResources.INSTANCE.setIndicesService(indicesService);
+        OpenSearchResources.INSTANCE.setIndicesService(indicesService);
 
         MetricsConfiguration.CONFIG_MAP.put(
                 CacheConfigMetricsCollector.class, MetricsConfiguration.cdefault);

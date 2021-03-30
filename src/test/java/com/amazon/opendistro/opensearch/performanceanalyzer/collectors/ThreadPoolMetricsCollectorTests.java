@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import com.amazon.opendistro.opensearch.performanceanalyzer.CustomMetricsLocationTestBase;
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.ThreadPoolMetricsCollector.ThreadPoolStatus;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
 import com.amazon.opendistro.opensearch.performanceanalyzer.reader_writer_shared.Event;
@@ -46,7 +46,7 @@ public class ThreadPoolMetricsCollectorTests extends CustomMetricsLocationTestBa
     public void init() {
         initMocks(this);
 
-        ESResources.INSTANCE.setThreadPool(mockThreadPool);
+        OpenSearchResources.INSTANCE.setThreadPool(mockThreadPool);
         System.setProperty("performanceanalyzer.metrics.log.enabled", "False");
         MetricsConfiguration.CONFIG_MAP.put(
                 ThreadPoolMetricsCollector.class, MetricsConfiguration.cdefault);

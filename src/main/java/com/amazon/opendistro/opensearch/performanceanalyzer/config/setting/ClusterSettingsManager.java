@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.config.setting;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.StatExceptionCode;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.StatsCollector;
 import java.util.ArrayList;
@@ -125,7 +125,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
     public void updateSetting(final Setting<Integer> setting, final Integer newValue) {
         final ClusterUpdateSettingsRequest request = new ClusterUpdateSettingsRequest();
         request.persistentSettings(Settings.builder().put(setting.getKey(), newValue).build());
-        ESResources.INSTANCE.getClient().admin().cluster().updateSettings(request);
+        OpenSearchResources.INSTANCE.getClient().admin().cluster().updateSettings(request);
     }
 
     /**
@@ -137,13 +137,13 @@ public class ClusterSettingsManager implements ClusterStateListener {
     public void updateSetting(final Setting<String> setting, final String newValue) {
         final ClusterUpdateSettingsRequest request = new ClusterUpdateSettingsRequest();
         request.persistentSettings(Settings.builder().put(setting.getKey(), newValue).build());
-        ESResources.INSTANCE.getClient().admin().cluster().updateSettings(request);
+        OpenSearchResources.INSTANCE.getClient().admin().cluster().updateSettings(request);
     }
 
     /** Registers a setting update listener for all the settings managed by this instance. */
     private void registerSettingUpdateListener() {
         for (Setting<Integer> setting : managedIntSettings) {
-            ESResources.INSTANCE
+            OpenSearchResources.INSTANCE
                     .getClusterService()
                     .getClusterSettings()
                     .addSettingsUpdateConsumer(
@@ -151,7 +151,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
         }
 
         for (Setting<String> setting : managedStringSettings) {
-            ESResources.INSTANCE
+            OpenSearchResources.INSTANCE
                     .getClusterService()
                     .getClusterSettings()
                     .addSettingsUpdateConsumer(
@@ -166,7 +166,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
      */
     private boolean clusterStatePresent() {
         try {
-            final ClusterState clusterState = ESResources.INSTANCE.getClusterService().state();
+            final ClusterState clusterState = OpenSearchResources.INSTANCE.getClusterService().state();
             return clusterState != null;
         } catch (Exception | AssertionError t) {
             LOG.error("Unable to retrieve cluster state: Exception: {}", t.getMessage());
@@ -181,7 +181,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
         LOG.debug("Trying to read initial cluster settings");
         final ClusterStateRequest clusterStateRequest = new ClusterStateRequest();
         clusterStateRequest.routingTable(false).nodes(false);
-        ESResources.INSTANCE
+        OpenSearchResources.INSTANCE
                 .getClient()
                 .admin()
                 .cluster()
@@ -195,7 +195,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
      * @param clusterStateListener The listener to be registered.
      */
     private void registerClusterStateListener(final ClusterStateListener clusterStateListener) {
-        ESResources.INSTANCE.getClusterService().addListener(clusterStateListener);
+        OpenSearchResources.INSTANCE.getClusterService().addListener(clusterStateListener);
     }
 
     /**
@@ -210,7 +210,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
         final ClusterState state = event.state();
 
         if (state != null) {
-            ESResources.INSTANCE.getClusterService().removeListener(this);
+            OpenSearchResources.INSTANCE.getClusterService().removeListener(this);
             registerSettingUpdateListener();
             readAllManagedClusterSettings();
         }

@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.CircuitBreakerDimension;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.CircuitBreakerValue;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -39,12 +39,12 @@ public class CircuitBreakerCollector extends PerformanceAnalyzerMetricsCollector
 
     @Override
     public void collectMetrics(long startTime) {
-        if (ESResources.INSTANCE.getCircuitBreakerService() == null) {
+        if (OpenSearchResources.INSTANCE.getCircuitBreakerService() == null) {
             return;
         }
 
         CircuitBreakerStats[] allCircuitBreakerStats =
-                ESResources.INSTANCE.getCircuitBreakerService().stats().getAllStats();
+                OpenSearchResources.INSTANCE.getCircuitBreakerService().stats().getAllStats();
         // - Reusing the same StringBuilder across exectuions; so clearing before using
         value.setLength(0);
         value.append(PerformanceAnalyzerMetrics.getJsonCurrentMilliSeconds());

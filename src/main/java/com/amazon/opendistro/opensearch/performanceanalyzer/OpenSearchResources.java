@@ -24,8 +24,8 @@ import org.elasticsearch.indices.IndicesService;
 import org.elasticsearch.indices.breaker.CircuitBreakerService;
 import org.elasticsearch.threadpool.ThreadPool;
 
-public final class ESResources {
-    public static final ESResources INSTANCE = new ESResources();
+public final class OpenSearchResources {
+    public static final OpenSearchResources INSTANCE = new OpenSearchResources();
 
     private ThreadPool threadPool;
     private CircuitBreakerService circuitBreakerService;
@@ -37,7 +37,7 @@ public final class ESResources {
     private String pluginFileLocation;
     private Client client;
 
-    private ESResources() {
+    private OpenSearchResources() {
         threadPool = null;
         circuitBreakerService = null;
         clusterService = null;

@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -56,7 +56,7 @@ public class MasterServiceEventMetricsTests {
     public void init() {
         threadPool = new TestThreadPool("test");
         ClusterService clusterService = ClusterServiceUtils.createClusterService(threadPool);
-        ESResources.INSTANCE.setClusterService(clusterService);
+        OpenSearchResources.INSTANCE.setClusterService(clusterService);
 
         MetricsConfiguration.CONFIG_MAP.put(
                 MasterServiceEventMetrics.class, MetricsConfiguration.cdefault);
@@ -122,7 +122,7 @@ public class MasterServiceEventMetricsTests {
                 (PrioritizedEsThreadPoolExecutor)
                         masterServiceEventMetrics
                                 .getMasterServiceTPExecutorField()
-                                .get(ESResources.INSTANCE.getClusterService().getMasterService());
+                                .get(OpenSearchResources.INSTANCE.getClusterService().getMasterService());
         SourcePrioritizedRunnable runnable =
                 new SourcePrioritizedRunnable(Priority.HIGH, "_add_listener_") {
                     @Override

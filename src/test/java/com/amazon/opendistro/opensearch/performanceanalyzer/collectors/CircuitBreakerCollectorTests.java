@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.CircuitBreakerCollector.CircuitBreakerStatus;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -43,8 +43,8 @@ public class CircuitBreakerCollectorTests extends ESSingleNodeTestCase {
     @Before
     public void init() {
         IndicesService indicesService = getInstanceFromNode(IndicesService.class);
-        ESResources.INSTANCE.setIndicesService(indicesService);
-        ESResources.INSTANCE.setCircuitBreakerService(indicesService.getCircuitBreakerService());
+        OpenSearchResources.INSTANCE.setIndicesService(indicesService);
+        OpenSearchResources.INSTANCE.setCircuitBreakerService(indicesService.getCircuitBreakerService());
 
         MetricsConfiguration.CONFIG_MAP.put(
                 CircuitBreakerCollector.class, MetricsConfiguration.cdefault);

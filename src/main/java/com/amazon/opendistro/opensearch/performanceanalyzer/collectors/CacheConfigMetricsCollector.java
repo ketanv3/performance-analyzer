@@ -19,7 +19,7 @@ import static com.amazon.opendistro.opensearch.performanceanalyzer.decisionmaker
 import static com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.CacheType.FIELD_DATA_CACHE;
 import static com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.CacheType.SHARD_REQUEST_CACHE;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.CacheConfigDimension;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.CacheConfigValue;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -59,7 +59,7 @@ public class CacheConfigMetricsCollector extends PerformanceAnalyzerMetricsColle
 
     @Override
     public void collectMetrics(long startTime) {
-        IndicesService indicesService = ESResources.INSTANCE.getIndicesService();
+        IndicesService indicesService = OpenSearchResources.INSTANCE.getIndicesService();
         if (indicesService == null) {
             return;
         }

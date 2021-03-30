@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.PerformanceAnalyzerApp;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
@@ -90,7 +90,7 @@ public class ShardIndexingPressureMetricsCollector extends PerformanceAnalyzerMe
 
         long mCurrT = System.currentTimeMillis();
         try {
-            ClusterService clusterService = ESResources.INSTANCE.getClusterService();
+            ClusterService clusterService = OpenSearchResources.INSTANCE.getClusterService();
             if (clusterService != null) {
                 Object indexingPressure =
                         getField(CLUSTER_SERVICE_CLASS_NAME, INDEXING_PRESSURE_FIELD_NAME)

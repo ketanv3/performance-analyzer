@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.NodeStatsAllShardsMetricsCollector.NodeStatsMetricsAllShardsPerCollectionStatus;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -42,7 +42,7 @@ public class NodeStatsAllShardsMetricsCollectorTests extends ESSingleNodeTestCas
     @Before
     public void init() {
         IndicesService indicesService = getInstanceFromNode(IndicesService.class);
-        ESResources.INSTANCE.setIndicesService(indicesService);
+        OpenSearchResources.INSTANCE.setIndicesService(indicesService);
 
         MetricsConfiguration.CONFIG_MAP.put(
                 NodeStatsAllShardsMetricsCollector.class, MetricsConfiguration.cdefault);

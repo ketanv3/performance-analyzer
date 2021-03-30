@@ -17,7 +17,7 @@ package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.NodeDetailsCollector.NodeDetailsStatus;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
@@ -67,7 +67,7 @@ public class NodeDetailsCollectorTests extends ESTestCase {
         threadPool = new TestThreadPool("test");
         ClusterService clusterService =
                 ClusterServiceUtils.createClusterService(threadPool, testNode);
-        ESResources.INSTANCE.setClusterService(clusterService);
+        OpenSearchResources.INSTANCE.setClusterService(clusterService);
 
         MetricsConfiguration.CONFIG_MAP.put(
                 NodeDetailsCollector.class, MetricsConfiguration.cdefault);

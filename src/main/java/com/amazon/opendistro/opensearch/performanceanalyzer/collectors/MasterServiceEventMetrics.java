@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.MasterMetricDimensions;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.MasterMetricValues;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -85,8 +85,8 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
     @Override
     public void collectMetrics(long startTime) {
         try {
-            if (ESResources.INSTANCE.getClusterService() == null
-                    || ESResources.INSTANCE.getClusterService().getMasterService() == null) {
+            if (OpenSearchResources.INSTANCE.getClusterService() == null
+                    || OpenSearchResources.INSTANCE.getClusterService().getMasterService() == null) {
                 return;
             }
 
@@ -220,9 +220,9 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
 
     Queue<Runnable> getMasterServiceCurrentQueue() throws Exception {
         if (masterServiceCurrentQueue == null) {
-            if (ESResources.INSTANCE.getClusterService() != null) {
+            if (OpenSearchResources.INSTANCE.getClusterService() != null) {
                 MasterService masterService =
-                        ESResources.INSTANCE.getClusterService().getMasterService();
+                        OpenSearchResources.INSTANCE.getClusterService().getMasterService();
 
                 if (masterService != null) {
                     if (prioritizedEsThreadPoolExecutor == null) {
@@ -248,9 +248,9 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
 
     HashSet<Object> getMasterServiceWorkers() throws Exception {
         if (masterServiceWorkers == null) {
-            if (ESResources.INSTANCE.getClusterService() != null) {
+            if (OpenSearchResources.INSTANCE.getClusterService() != null) {
                 MasterService masterService =
-                        ESResources.INSTANCE.getClusterService().getMasterService();
+                        OpenSearchResources.INSTANCE.getClusterService().getMasterService();
 
                 if (masterService != null) {
                     if (prioritizedEsThreadPoolExecutor == null) {

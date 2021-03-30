@@ -151,10 +151,10 @@ public class PerformanceAnalyzerPluginTests extends ESTestCase {
                         null,
                         null);
         assertEquals(1, components.size());
-        assertEquals(settings, ESResources.INSTANCE.getSettings());
-        assertEquals(threadPool, ESResources.INSTANCE.getThreadPool());
-        assertEquals(environment, ESResources.INSTANCE.getEnvironment());
-        assertEquals(nodeClient, ESResources.INSTANCE.getClient());
+        assertEquals(settings, OpenSearchResources.INSTANCE.getSettings());
+        assertEquals(threadPool, OpenSearchResources.INSTANCE.getThreadPool());
+        assertEquals(environment, OpenSearchResources.INSTANCE.getEnvironment());
+        assertEquals(nodeClient, OpenSearchResources.INSTANCE.getClient());
     }
 
     @Test
@@ -162,8 +162,8 @@ public class PerformanceAnalyzerPluginTests extends ESTestCase {
         Map<String, Supplier<Transport>> map =
                 plugin.getTransports(settings, threadPool, null, circuitBreakerService, null, null);
         assertEquals(0, map.size());
-        assertEquals(settings, ESResources.INSTANCE.getSettings());
-        assertEquals(circuitBreakerService, ESResources.INSTANCE.getCircuitBreakerService());
+        assertEquals(settings, OpenSearchResources.INSTANCE.getSettings());
+        assertEquals(circuitBreakerService, OpenSearchResources.INSTANCE.getCircuitBreakerService());
     }
 
     @Test

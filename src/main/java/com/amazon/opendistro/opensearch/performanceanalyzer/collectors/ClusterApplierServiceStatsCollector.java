@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.PerformanceAnalyzerApp;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
@@ -76,8 +76,8 @@ public class ClusterApplierServiceStatsCollector extends PerformanceAnalyzerMetr
         }
         try {
             long mCurrT = System.currentTimeMillis();
-            if (ESResources.INSTANCE.getClusterService() == null
-                    || ESResources.INSTANCE.getClusterService().getClusterApplierService()
+            if (OpenSearchResources.INSTANCE.getClusterService() == null
+                    || OpenSearchResources.INSTANCE.getClusterService().getClusterApplierService()
                             == null) {
                 return;
             }
@@ -135,7 +135,7 @@ public class ClusterApplierServiceStatsCollector extends PerformanceAnalyzerMetr
         Method method =
                 ClusterApplierService.class.getMethod(
                         GET_CLUSTER_APPLIER_SERVICE_STATS_METHOD_NAME);
-        return method.invoke(ESResources.INSTANCE.getClusterService().getClusterApplierService());
+        return method.invoke(OpenSearchResources.INSTANCE.getClusterService().getClusterApplierService());
     }
 
     /**

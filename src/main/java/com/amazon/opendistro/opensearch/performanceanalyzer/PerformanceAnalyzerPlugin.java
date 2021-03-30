@@ -160,9 +160,9 @@ public final class PerformanceAnalyzerPlugin extends Plugin
     public PerformanceAnalyzerPlugin(final Settings settings, final java.nio.file.Path configPath) {
         OSMetricsGeneratorFactory.getInstance();
 
-        ESResources.INSTANCE.setSettings(settings);
-        ESResources.INSTANCE.setConfigPath(configPath);
-        ESResources.INSTANCE.setPluginFileLocation(
+        OpenSearchResources.INSTANCE.setSettings(settings);
+        OpenSearchResources.INSTANCE.setConfigPath(configPath);
+        OpenSearchResources.INSTANCE.setPluginFileLocation(
                 new Environment(settings, configPath).pluginsFile().toAbsolutePath().toString()
                         + File.separator
                         + PLUGIN_NAME
@@ -360,10 +360,10 @@ public final class PerformanceAnalyzerPlugin extends Plugin
             NamedWriteableRegistry namedWriteableRegistry,
             IndexNameExpressionResolver indexNameExpressionResolver,
             Supplier<RepositoriesService> repositoriesServiceSupplier) {
-        ESResources.INSTANCE.setClusterService(clusterService);
-        ESResources.INSTANCE.setThreadPool(threadPool);
-        ESResources.INSTANCE.setEnvironment(environment);
-        ESResources.INSTANCE.setClient(client);
+        OpenSearchResources.INSTANCE.setClusterService(clusterService);
+        OpenSearchResources.INSTANCE.setThreadPool(threadPool);
+        OpenSearchResources.INSTANCE.setEnvironment(environment);
+        OpenSearchResources.INSTANCE.setClient(client);
 
         // ClusterSettingsManager needs ClusterService to have been created before we can
         // initialize it. This is the earliest point at which we know ClusterService is created.
@@ -380,8 +380,8 @@ public final class PerformanceAnalyzerPlugin extends Plugin
             CircuitBreakerService circuitBreakerService,
             NamedWriteableRegistry namedWriteableRegistry,
             NetworkService networkService) {
-        ESResources.INSTANCE.setSettings(settings);
-        ESResources.INSTANCE.setCircuitBreakerService(circuitBreakerService);
+        OpenSearchResources.INSTANCE.setSettings(settings);
+        OpenSearchResources.INSTANCE.setCircuitBreakerService(circuitBreakerService);
         return Collections.emptyMap();
     }
 

@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.http_action.whoami;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.support.ActionFilters;
 import org.elasticsearch.action.support.HandledTransportAction;
@@ -33,7 +33,7 @@ public class TransportWhoAmIAction extends HandledTransportAction<WhoAmIRequest,
             final ActionFilters actionFilters,
             final IndicesService indicesService) {
         super(WhoAmIAction.NAME, transportService, actionFilters, WhoAmIRequest::new);
-        ESResources.INSTANCE.setIndicesService(indicesService);
+        OpenSearchResources.INSTANCE.setIndicesService(indicesService);
     }
 
     @Override

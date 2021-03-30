@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import com.amazon.opendistro.opensearch.performanceanalyzer.CustomMetricsLocationTestBase;
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -48,7 +48,7 @@ public class ShardIndexingPressureMetricsCollectorTests extends CustomMetricsLoc
     @Before
     public void init() {
         initMocks(this);
-        ESResources.INSTANCE.setClusterService(mockClusterService);
+        OpenSearchResources.INSTANCE.setClusterService(mockClusterService);
         System.setProperty("performanceanalyzer.metrics.log.enabled", "False");
         MetricsConfiguration.CONFIG_MAP.put(
                 ShardIndexingPressureMetricsCollector.class, MetricsConfiguration.cdefault);

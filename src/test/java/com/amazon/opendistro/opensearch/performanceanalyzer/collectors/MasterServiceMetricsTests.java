@@ -22,7 +22,7 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.MasterPendingValue;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -52,7 +52,7 @@ public class MasterServiceMetricsTests {
         System.setProperty("performanceanalyzer.metrics.log.enabled", "False");
         threadPool = new TestThreadPool("test");
         ClusterService clusterService = ClusterServiceUtils.createClusterService(threadPool);
-        ESResources.INSTANCE.setClusterService(clusterService);
+        OpenSearchResources.INSTANCE.setClusterService(clusterService);
 
         MetricsConfiguration.CONFIG_MAP.put(
                 MasterServiceMetrics.class, MetricsConfiguration.cdefault);
@@ -100,18 +100,18 @@ public class MasterServiceMetricsTests {
 
     @Test
     public void testWithMockClusterService() {
-        ESResources.INSTANCE.setClusterService(mockedClusterService);
+        OpenSearchResources.INSTANCE.setClusterService(mockedClusterService);
         masterServiceMetrics.collectMetrics(startTimeInMills);
         String jsonStr = readMetricsInJsonString(0);
         assertNull(jsonStr);
 
-        ESResources.INSTANCE.setClusterService(mockedClusterService);
+        OpenSearchResources.INSTANCE.setClusterService(mockedClusterService);
         when(mockedClusterService.getMasterService()).thenThrow(new RuntimeException());
         masterServiceMetrics.collectMetrics(startTimeInMills);
         jsonStr = readMetricsInJsonString(0);
         assertNull(jsonStr);
 
-        ESResources.INSTANCE.setClusterService(null);
+        OpenSearchResources.INSTANCE.setClusterService(null);
         masterServiceMetrics.collectMetrics(startTimeInMills);
         jsonStr = readMetricsInJsonString(0);
         assertNull(jsonStr);

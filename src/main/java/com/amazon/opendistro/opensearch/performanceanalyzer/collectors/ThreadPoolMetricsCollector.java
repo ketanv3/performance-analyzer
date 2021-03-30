@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ThreadPoolDimension;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ThreadPoolValue;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
@@ -53,11 +53,11 @@ public class ThreadPoolMetricsCollector extends PerformanceAnalyzerMetricsCollec
 
     @Override
     public void collectMetrics(long startTime) {
-        if (ESResources.INSTANCE.getThreadPool() == null) {
+        if (OpenSearchResources.INSTANCE.getThreadPool() == null) {
             return;
         }
 
-        Iterator<Stats> statsIterator = ESResources.INSTANCE.getThreadPool().stats().iterator();
+        Iterator<Stats> statsIterator = OpenSearchResources.INSTANCE.getThreadPool().stats().iterator();
         value.setLength(0);
         value.append(PerformanceAnalyzerMetrics.getJsonCurrentMilliSeconds());
 
@@ -91,7 +91,7 @@ public class ThreadPoolMetricsCollector extends PerformanceAnalyzerMetricsCollec
                                             ThreadPool threadPool =
                                                     (ThreadPool)
                                                             FieldUtils.readField(
-                                                                    ESResources.INSTANCE
+                                                                    OpenSearchResources.INSTANCE
                                                                             .getIndicesService(),
                                                                     "threadPool",
                                                                     true);

@@ -21,7 +21,7 @@ import static org.elasticsearch.test.ESTestCase.settings;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
@@ -64,7 +64,7 @@ public class ShardStateCollectorTests {
     @Before
     public void init() {
         clusterService = Mockito.mock(ClusterService.class);
-        ESResources.INSTANCE.setClusterService(clusterService);
+        OpenSearchResources.INSTANCE.setClusterService(clusterService);
 
         System.setProperty("performanceanalyzer.metrics.log.enabled", "False");
         MetricsConfiguration.CONFIG_MAP.put(

@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesHelper;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.NodeDetailColumns;
@@ -47,9 +47,9 @@ public class NodeDetailsCollector extends PerformanceAnalyzerMetricsCollector
 
     @Override
     public void collectMetrics(long startTime) {
-        if (ESResources.INSTANCE.getClusterService() == null
-                || ESResources.INSTANCE.getClusterService().state() == null
-                || ESResources.INSTANCE.getClusterService().state().nodes() == null) {
+        if (OpenSearchResources.INSTANCE.getClusterService() == null
+                || OpenSearchResources.INSTANCE.getClusterService().state() == null
+                || OpenSearchResources.INSTANCE.getClusterService().state().nodes() == null) {
             return;
         }
 
@@ -83,7 +83,7 @@ public class NodeDetailsCollector extends PerformanceAnalyzerMetricsCollector
         }
         value.append(PerformanceAnalyzerMetrics.sMetricNewLineDelimitor);
 
-        DiscoveryNodes discoveryNodes = ESResources.INSTANCE.getClusterService().state().nodes();
+        DiscoveryNodes discoveryNodes = OpenSearchResources.INSTANCE.getClusterService().state().nodes();
 
         DiscoveryNode masterNode = discoveryNodes.getMasterNode();
 

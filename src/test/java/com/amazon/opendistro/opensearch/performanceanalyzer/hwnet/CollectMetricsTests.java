@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.amazon.opendistro.opensearch.performanceanalyzer.AbstractTests;
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.OSMetricsGeneratorFactory;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.CircuitBreakerCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.NetInterfaceSummary;
@@ -82,7 +82,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PowerMockIgnore({"org.apache.logging.log4j.*"})
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
-    ESResources.class,
+    OpenSearchResources.class,
     NetworkE2E.class,
     NetworkInterface.class,
     PluginSettings.class,
@@ -162,12 +162,12 @@ public class CollectMetricsTests extends AbstractTests {
 
         when(circuitBreakerService.stats()).thenReturn(circuitBreakerStats);
 
-        ESResources resource = PowerMockito.mock(ESResources.class);
+        OpenSearchResources resource = PowerMockito.mock(OpenSearchResources.class);
         when(resource.getCircuitBreakerService()).thenReturn(circuitBreakerService);
 
-        Field f = ESResources.class.getDeclaredField("INSTANCE");
+        Field f = OpenSearchResources.class.getDeclaredField("INSTANCE");
         f.setAccessible(true);
-        f.set(ESResources.class, resource);
+        f.set(OpenSearchResources.class, resource);
 
         long timeBeforeCollectorWriting = System.currentTimeMillis();
 
@@ -525,12 +525,12 @@ public class CollectMetricsTests extends AbstractTests {
 
         when(clusterService.state()).thenReturn(clusterState);
 
-        ESResources resource = PowerMockito.mock(ESResources.class);
+        OpenSearchResources resource = PowerMockito.mock(OpenSearchResources.class);
         when(resource.getClusterService()).thenReturn(clusterService);
 
-        Field f = ESResources.class.getDeclaredField("INSTANCE");
+        Field f = OpenSearchResources.class.getDeclaredField("INSTANCE");
         f.setAccessible(true);
-        f.set(ESResources.class, resource);
+        f.set(OpenSearchResources.class, resource);
 
         long timeBeforeCollectorWriting = System.currentTimeMillis();
 

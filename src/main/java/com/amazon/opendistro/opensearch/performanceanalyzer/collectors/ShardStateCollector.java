@@ -18,7 +18,7 @@ package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 import static com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ShardType.SHARD_PRIMARY;
 import static com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ShardType.SHARD_REPLICA;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.PerformanceAnalyzerApp;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
@@ -64,10 +64,10 @@ public class ShardStateCollector extends PerformanceAnalyzerMetricsCollector
             return;
         }
         long mCurrT = System.currentTimeMillis();
-        if (ESResources.INSTANCE.getClusterService() == null) {
+        if (OpenSearchResources.INSTANCE.getClusterService() == null) {
             return;
         }
-        ClusterState clusterState = ESResources.INSTANCE.getClusterService().state();
+        ClusterState clusterState = OpenSearchResources.INSTANCE.getClusterService().state();
         boolean inActiveShard = false;
         try {
             value.setLength(0);

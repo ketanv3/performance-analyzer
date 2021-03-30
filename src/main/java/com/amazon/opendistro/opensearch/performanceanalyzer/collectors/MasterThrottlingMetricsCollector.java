@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.PerformanceAnalyzerApp;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
@@ -65,8 +65,8 @@ public class MasterThrottlingMetricsCollector extends PerformanceAnalyzerMetrics
         }
         try {
             long mCurrT = System.currentTimeMillis();
-            if (ESResources.INSTANCE.getClusterService() == null
-                    || ESResources.INSTANCE.getClusterService().getMasterService() == null) {
+            if (OpenSearchResources.INSTANCE.getClusterService() == null
+                    || OpenSearchResources.INSTANCE.getClusterService().getMasterService() == null) {
                 return;
             }
             if (!isMasterThrottlingFeatureAvailable()) {
@@ -114,7 +114,7 @@ public class MasterThrottlingMetricsCollector extends PerformanceAnalyzerMetrics
 
     private long getTotalMasterThrottledTaskCount() throws Exception {
         Method method = MasterService.class.getMethod(THROTTLED_PENDING_TASK_COUNT_METHOD_NAME);
-        return (long) method.invoke(ESResources.INSTANCE.getClusterService().getMasterService());
+        return (long) method.invoke(OpenSearchResources.INSTANCE.getClusterService().getMasterService());
     }
 
     private long getRetryingPendingTaskCount() throws Exception {

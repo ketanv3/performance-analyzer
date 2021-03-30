@@ -17,7 +17,7 @@ package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ShardStatsValue;
@@ -46,7 +46,7 @@ public class NodeStatsFixedShardsMetricsCollectorTests extends ESSingleNodeTestC
         initMocks(this);
 
         IndicesService indicesService = getInstanceFromNode(IndicesService.class);
-        ESResources.INSTANCE.setIndicesService(indicesService);
+        OpenSearchResources.INSTANCE.setIndicesService(indicesService);
 
         MetricsConfiguration.CONFIG_MAP.put(
                 NodeStatsAllShardsMetricsCollector.class, MetricsConfiguration.cdefault);

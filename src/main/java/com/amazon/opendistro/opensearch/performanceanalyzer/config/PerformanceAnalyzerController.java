@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.config;
 
 
-import com.amazon.opendistro.opensearch.performanceanalyzer.ESResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.PerformanceAnalyzerPlugin;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.ScheduledMetricCollectorsExecutor;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
@@ -266,7 +266,7 @@ public class PerformanceAnalyzerController {
 
     private String getDataDirectory() {
         return new org.elasticsearch.env.Environment(
-                        ESResources.INSTANCE.getSettings(), ESResources.INSTANCE.getConfigPath())
+                        OpenSearchResources.INSTANCE.getSettings(), OpenSearchResources.INSTANCE.getConfigPath())
                 .dataFiles()[0] // $ES_HOME/var/es/data
                 .toFile()
                 .getPath();
