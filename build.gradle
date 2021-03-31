@@ -16,7 +16,7 @@
 buildscript {
 
     ext {
-        es_version = System.getProperty("es.version", "7.10.2")
+        es_version = System.getProperty("es.version", "7.10.3-SNAPSHOT")
     }
     // This isn't applying from repositories.gradle so repeating it here
     repositories {
@@ -25,7 +25,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.elasticsearch.gradle:build-tools:${es_version}"
+        classpath "org.opensearch.gradle:build-tools:${es_version}"
         classpath 'org.ajoberstar:gradle-git:0.2.3'
     }
 }
@@ -64,7 +64,7 @@ if (isSnapshot) {
     version += "-SNAPSHOT"
 }
 
-apply plugin: 'elasticsearch.esplugin'
+apply plugin: 'opensearch.opensearchplugin'
 
 ext {
     projectSubstitutions = [:]
@@ -101,7 +101,7 @@ validateNebulaPom.enabled = false
 
 loggerUsageCheck.enabled = false
 
-esplugin {
+opensearchplugin {
     name 'opendistro-performance-analyzer'
     description 'Performance Analyzer Plugin'
     classname 'com.amazon.opendistro.opensearch.performanceanalyzer.PerformanceAnalyzerPlugin'
@@ -163,7 +163,7 @@ jacocoTestReport {
         classDirectories.from = files(classDirectories.files.collect {
             fileTree(dir: it,
                     include: [
-                            '**/com/amazon/opendistro/elasticsearch/performanceanalyzer/**',
+                            '**/com/amazon/opendistro/opensearch/performanceanalyzer/**',
                     ],
                     exclude: [
                             '**/FaultDetectionMetricsCollector.class',
@@ -180,7 +180,7 @@ jacocoTestCoverageVerification {
         classDirectories.from = files(classDirectories.files.collect {
             fileTree(dir: it,
                     include: [
-                            '**/com/amazon/opendistro/elasticsearch/performanceanalyzer/**',
+                            '**/com/amazon/opendistro/opensearch/performanceanalyzer/**',
                     ],
                     exclude: [
                     ])
@@ -231,7 +231,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.9'
     compile 'org.bouncycastle:bcprov-jdk15on:1.68'
     compile 'org.bouncycastle:bcpkix-jdk15on:1.68'
-    compile 'com.amazon.opendistro.elasticsearch:performanceanalyzer-rca:1.13'
+    compile 'com.amazon.opendistro.opensearch:performanceanalyzer-rca:1.13'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.10.5'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.10.5.1'
     compile 'com.fasterxml.jackson.module:jackson-module-paranamer:2.10.5'
@@ -284,7 +284,7 @@ gradle.startParameter.excludedTaskNames += [ "forbiddenApisMain",
                                              "testingConventions"]
 import java.nio.file.Paths
 import org.ajoberstar.gradle.git.tasks.GitClone
-import org.elasticsearch.gradle.test.RestIntegTestTask
+import org.opensearch.gradle.test.RestIntegTestTask
 
 String rcaDir
 String rcaArtifactsDir
@@ -437,7 +437,7 @@ afterEvaluate {
 
         into '/usr/share/elasticsearch/plugins'
         from(zipTree(bundlePlugin.archivePath)) {
-            into esplugin.name
+            into opensearchplugin.name
         }
 
         configurationFile '/usr/lib/systemd/system/opendistro-elasticsearch.service'
