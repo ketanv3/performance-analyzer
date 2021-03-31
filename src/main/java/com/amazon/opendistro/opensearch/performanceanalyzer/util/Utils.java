@@ -71,7 +71,7 @@ public class Utils {
     // shards collector and the few shards collector.
 
     /**
-     * This function is copied directly from IndicesService.java in elastic search as the original
+     * This function is copied directly from IndicesService.java in opensearch as the original
      * function is not public we need to collect stats per shard based instead of calling the stat()
      * function to fetch all at once(which increases cpu usage on data nodes dramatically).
      *

@@ -41,7 +41,7 @@ public class MasterThrottlingMetricsCollector extends PerformanceAnalyzerMetrics
     private static final Logger LOG = LogManager.getLogger(MasterThrottlingMetricsCollector.class);
     private static final int KEYS_PATH_LENGTH = 0;
     private static final String MASTER_THROTTLING_RETRY_LISTENER_PATH =
-            "org.elasticsearch.action.support.master.MasterThrottlingRetryListener";
+            "org.opensearch.action.support.master.MasterThrottlingRetryListener";
     private static final String THROTTLED_PENDING_TASK_COUNT_METHOD_NAME =
             "numberOfThrottledPendingTasks";
     private static final String RETRYING_TASK_COUNT_METHOD_NAME = "getRetryingTasksCount";

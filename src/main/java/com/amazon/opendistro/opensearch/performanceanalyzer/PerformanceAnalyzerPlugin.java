@@ -247,7 +247,7 @@ public final class PerformanceAnalyzerPlugin extends Plugin
                             performanceAnalyzerController, configOverridesWrapper));
         } catch (ClassNotFoundException e) {
             LOG.info(
-                    "Shard IndexingPressure not present in this ES version. Skipping ShardIndexingPressureMetricsCollector");
+                    "Shard IndexingPressure not present in this OpenSearch version. Skipping ShardIndexingPressureMetricsCollector");
         }
         scheduledMetricCollectorsExecutor.start();
 

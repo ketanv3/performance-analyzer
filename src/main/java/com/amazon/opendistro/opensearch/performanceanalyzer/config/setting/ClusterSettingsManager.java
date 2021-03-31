@@ -101,7 +101,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
     /** Bootstraps the listeners and tries to read initial values for cluster settings. */
     public void initialize() {
         if (!initialized) {
-            // When an ES node is just started, the plugin initialization happens
+            // When an OpenSearch node is just started, the plugin initialization happens
             // before there is any cluster state set. So, check if there is a cluster
             // state first, if there is no cluster state, register a ClusterStateListener
             // before trying to read the initial cluster setting values.

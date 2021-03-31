@@ -139,12 +139,12 @@ public class ClusterApplierServiceStatsCollector extends PerformanceAnalyzerMetr
     }
 
     /**
-     * ClusterApplierServiceStats is ES is a tracker for total time taken to apply cluster state and
+     * ClusterApplierServiceStats is OpenSearch is a tracker for total time taken to apply cluster state and
      * the number of times it has failed. To calculate point in time metric, we will have to store
      * its previous state and calculate the diff to get the point in time latency. This might return
      * as 0 if there is no cluster update since last retrieval.
      *
-     * @param currentMetrics Current Cluster update stats in ES
+     * @param currentMetrics Current Cluster update stats in OpenSearch
      * @return point in time latency.
      */
     private double computeLatency(final ClusterApplierServiceStats currentMetrics) {
@@ -161,12 +161,12 @@ public class ClusterApplierServiceStatsCollector extends PerformanceAnalyzerMetr
     }
 
     /**
-     * ClusterApplierServiceStats is ES is a tracker for total time taken to apply cluster state and
+     * ClusterApplierServiceStats is OpenSearch is a tracker for total time taken to apply cluster state and
      * the number of times it has failed. To calculate point in time metric, we will have to store
      * its previous state and calculate the diff to get the point in time failure. This might return
      * as 0 if there is no cluster update since last retrieval.
      *
-     * @param currentMetrics Current Cluster update stats in ES
+     * @param currentMetrics Current Cluster update stats in OpenSearch
      * @return point in time failure.
      */
     private double computeFailure(final ClusterApplierServiceStats currentMetrics) {

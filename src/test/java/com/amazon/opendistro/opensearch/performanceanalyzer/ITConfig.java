@@ -22,9 +22,9 @@ public class ITConfig {
     private String user;
     // The password of the user provided above
     private String password;
-    // The Elasticsearch REST endpoint to initialize clients against of the form $host:$port
+    // The OpenSearch REST endpoint to initialize clients against of the form $host:$port
     private String restEndpoint;
-    // The Elasticsearch transport endpoint to initialize clients against of the form $host:$port
+    // The OpenSearch transport endpoint to initialize clients against of the form $host:$port
     // see https://discuss.elastic.co/t/transport-client-vs-rest-client/13936 for a synopsis of the
     // difference between REST and transport endpoints
     private String transportEndpoint;

@@ -71,10 +71,10 @@ public class PerformanceAnalyzerTransportRequestHandler<T extends TransportReque
         boolean bPrimary = false;
 
         if (className.equals(
-                "org.elasticsearch.action.support.replication.TransportReplicationAction$ConcreteShardRequest")) {
+                "org.opensearch.action.support.replication.TransportReplicationAction$ConcreteShardRequest")) {
             bPrimary = true;
         } else if (className.equals(
-                "org.elasticsearch.action.support.replication.TransportReplicationAction$ConcreteReplicaRequest")) {
+                "org.opensearch.action.support.replication.TransportReplicationAction$ConcreteReplicaRequest")) {
             bPrimary = false;
         } else {
             return channel;

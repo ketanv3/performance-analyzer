@@ -52,13 +52,13 @@ public class ShardIndexingPressureMetricsCollector extends PerformanceAnalyzerMe
     private static final JSONParser parser = new JSONParser();
 
     public static final String SHARD_INDEXING_PRESSURE_CLASS_NAME =
-            "org.elasticsearch.index.ShardIndexingPressure";
+            "org.opensearch.index.ShardIndexingPressure";
     public static final String CLUSTER_SERVICE_CLASS_NAME =
-            "org.elasticsearch.cluster.service.ClusterService";
+            "org.opensearch.cluster.service.ClusterService";
     public static final String INDEXING_PRESSURE_CLASS_NAME =
-            "org.elasticsearch.index.IndexingPressure";
+            "org.opensearch.index.IndexingPressure";
     public static final String SHARD_INDEXING_PRESSURE_STORE_CLASS_NAME =
-            "org.elasticsearch.index.ShardIndexingPressureStore";
+            "org.opensearch.index.ShardIndexingPressureStore";
     public static final String INDEXING_PRESSURE_FIELD_NAME = "indexingPressure";
     public static final String SHARD_INDEXING_PRESSURE_FIELD_NAME = "shardIndexingPressure";
     public static final String SHARD_INDEXING_PRESSURE_STORE_FIELD_NAME =

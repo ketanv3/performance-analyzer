@@ -45,10 +45,10 @@ public class AdmissionControlMetricsCollector extends PerformanceAnalyzerMetrics
     private static final String REQUEST_SIZE = "Request_Size";
 
     private static final String ADMISSION_CONTROLLER =
-            "com.sonian.elasticsearch.http.jetty.throttling.AdmissionController";
+            "com.sonian.opensearch.http.jetty.throttling.AdmissionController";
 
     private static final String ADMISSION_CONTROL_SERVICE =
-            "com.sonian.elasticsearch.http.jetty.throttling.JettyAdmissionControlService";
+            "com.sonian.opensearch.http.jetty.throttling.JettyAdmissionControlService";
 
     public AdmissionControlMetricsCollector() {
         super(sTimeInterval, "AdmissionControlMetricsCollector");

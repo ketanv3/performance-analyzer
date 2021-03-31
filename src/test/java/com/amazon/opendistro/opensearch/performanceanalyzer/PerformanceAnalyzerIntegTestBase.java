@@ -227,7 +227,7 @@ public abstract class PerformanceAnalyzerIntegTestBase extends OpenSearchRestTes
     }
 
     /**
-     * ensurePaAndRcaEnabled makes a best effort to enable PA and RCA on the test ES cluster
+     * ensurePaAndRcaEnabled makes a best effort to enable PA and RCA on the test OpenSearch cluster
      *
      * @throws Exception If the function is unable to enable PA and RCA
      */

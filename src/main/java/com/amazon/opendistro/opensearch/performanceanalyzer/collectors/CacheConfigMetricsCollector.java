@@ -66,7 +66,7 @@ public class CacheConfigMetricsCollector extends PerformanceAnalyzerMetricsColle
 
         value.setLength(0);
         value.append(PerformanceAnalyzerMetrics.getJsonCurrentMilliSeconds());
-        // This is for backward compatibility. Core ES may or may not emit maxWeight metric.
+        // This is for backward compatibility. Core OpenSearch may or may not emit maxWeight metric.
         // (depending on whether the patch has been applied or not). Thus, we need to use
         // reflection to check whether getMaxWeight() method exist in Cache.java
         //
