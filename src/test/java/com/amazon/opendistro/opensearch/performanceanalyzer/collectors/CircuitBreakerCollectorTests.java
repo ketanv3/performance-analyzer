@@ -30,12 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.opensearch.common.breaker.CircuitBreaker;
 import org.opensearch.indices.IndicesService;
-import org.opensearch.test.ESSingleNodeTestCase;
+import org.opensearch.test.OpenSearchSingleNodeTestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CircuitBreakerCollectorTests extends ESSingleNodeTestCase {
+public class CircuitBreakerCollectorTests extends OpenSearchSingleNodeTestCase {
     private static final String TEST_INDEX = "test";
     private CircuitBreakerCollector collector;
     private long startTimeInMills = 1153721339;

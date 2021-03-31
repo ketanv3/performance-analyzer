@@ -49,7 +49,7 @@ import org.opensearch.indices.breaker.HierarchyCircuitBreakerService;
 import org.opensearch.plugins.ActionPlugin.ActionHandler;
 import org.opensearch.rest.RestController;
 import org.opensearch.rest.RestHandler;
-import org.opensearch.test.ESTestCase;
+import org.opensearch.test.OpenSearchTestCase;
 import org.opensearch.threadpool.TestThreadPool;
 import org.opensearch.threadpool.ThreadPool;
 import org.opensearch.transport.Transport;
@@ -60,7 +60,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 @ThreadLeakScope(Scope.NONE)
-public class PerformanceAnalyzerPluginTests extends ESTestCase {
+public class PerformanceAnalyzerPluginTests extends OpenSearchTestCase {
     private PerformanceAnalyzerPlugin plugin;
     private Settings settings;
     private RestController restController;

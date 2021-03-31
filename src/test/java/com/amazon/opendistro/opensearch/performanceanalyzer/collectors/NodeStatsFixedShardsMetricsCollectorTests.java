@@ -27,14 +27,14 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.reader_writer_shared
 import com.amazon.opendistro.opensearch.performanceanalyzer.util.TestUtil;
 import java.util.List;
 import org.opensearch.indices.IndicesService;
-import org.opensearch.test.ESSingleNodeTestCase;
+import org.opensearch.test.OpenSearchSingleNodeTestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-public class NodeStatsFixedShardsMetricsCollectorTests extends ESSingleNodeTestCase {
+public class NodeStatsFixedShardsMetricsCollectorTests extends OpenSearchSingleNodeTestCase {
     private static final String TEST_INDEX = "test";
     private static long startTimeInMills = 1153721339;
     private NodeStatsFixedShardsMetricsCollector collector;

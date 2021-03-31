@@ -36,7 +36,7 @@ import org.opensearch.cluster.node.DiscoveryNode;
 import org.opensearch.cluster.node.DiscoveryNodeRole;
 import org.opensearch.cluster.service.ClusterService;
 import org.opensearch.test.ClusterServiceUtils;
-import org.opensearch.test.ESTestCase;
+import org.opensearch.test.OpenSearchTestCase;
 import org.opensearch.threadpool.TestThreadPool;
 import org.opensearch.threadpool.ThreadPool;
 import org.junit.After;
@@ -44,7 +44,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class NodeDetailsCollectorTests extends ESTestCase {
+public class NodeDetailsCollectorTests extends OpenSearchTestCase {
     private static final String NODE_ID = "testNode";
     private NodeDetailsCollector collector;
     private ThreadPool threadPool;
@@ -59,7 +59,7 @@ public class NodeDetailsCollectorTests extends ESTestCase {
         DiscoveryNode testNode =
                 new DiscoveryNode(
                         NODE_ID,
-                        ESTestCase.buildNewFakeTransportAddress(),
+                        OpenSearchTestCase.buildNewFakeTransportAddress(),
                         Collections.emptyMap(),
                         DiscoveryNodeRole.BUILT_IN_ROLES,
                         Version.CURRENT);

@@ -17,7 +17,7 @@ package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 import static com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ShardType.SHARD_PRIMARY;
 import static com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ShardType.SHARD_REPLICA;
-import static org.opensearch.test.ESTestCase.settings;
+import static org.opensearch.test.OpenSearchTestCase.settings;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -128,7 +128,7 @@ public class ShardStateCollectorTests {
                         .build();
 
         return ClusterState.builder(
-                        org.elasticsearch.cluster.ClusterName.CLUSTER_NAME_SETTING.getDefault(
+                        org.opensearch.cluster.ClusterName.CLUSTER_NAME_SETTING.getDefault(
                                 Settings.EMPTY))
                 .metadata(metaData)
                 .routingTable(testRoutingTable)

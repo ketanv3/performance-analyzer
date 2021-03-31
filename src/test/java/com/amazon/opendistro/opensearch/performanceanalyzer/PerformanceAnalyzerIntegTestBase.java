@@ -50,12 +50,12 @@ import org.opensearch.client.RestClientBuilder;
 import org.opensearch.common.settings.Settings;
 import org.opensearch.common.unit.TimeValue;
 import org.opensearch.common.util.concurrent.ThreadContext;
-import org.opensearch.test.rest.ESRestTestCase;
+import org.opensearch.test.rest.OpenSearchRestTestCase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
-public abstract class PerformanceAnalyzerIntegTestBase extends ESRestTestCase {
+public abstract class PerformanceAnalyzerIntegTestBase extends OpenSearchRestTestCase {
     private static final Logger LOG = LogManager.getLogger(PerformanceAnalyzerIntegTestBase.class);
     protected static final String PERFORMANCE_ANALYZER_BASE_ENDPOINT =
             "/_opendistro/_performanceanalyzer";
@@ -268,7 +268,7 @@ public abstract class PerformanceAnalyzerIntegTestBase extends ESRestTestCase {
 
     @After
     public void closePaClient() throws Exception {
-        ESRestTestCase.closeClients();
+        OpenSearchRestTestCase.closeClients();
         paClient.close();
         LOG.debug("AfterClass has run");
     }
