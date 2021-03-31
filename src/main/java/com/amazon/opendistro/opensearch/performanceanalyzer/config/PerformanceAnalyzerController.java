@@ -265,7 +265,7 @@ public class PerformanceAnalyzerController {
     }
 
     private String getDataDirectory() {
-        return new org.elasticsearch.env.Environment(
+        return new org.opensearch.env.Environment(
                         OpenSearchResources.INSTANCE.getSettings(), OpenSearchResources.INSTANCE.getConfigPath())
                 .dataFiles()[0] // $ES_HOME/var/es/data
                 .toFile()

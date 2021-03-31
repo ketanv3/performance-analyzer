@@ -20,7 +20,7 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.H
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.HttpMetric;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsProcessor;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceAnalyzerMetrics;
-import org.opensearch.ElasticsearchException;
+import org.opensearch.OpenSearchException;
 import org.opensearch.action.ActionListener;
 import org.opensearch.action.bulk.BulkResponse;
 import org.opensearch.action.search.SearchResponse;
@@ -69,11 +69,11 @@ public class PerformanceAnalyzerActionListener<Response>
     public void onFailure(Exception exception) {
         long currTime = System.currentTimeMillis();
 
-        if (exception instanceof ElasticsearchException) {
+        if (exception instanceof OpenSearchException) {
             saveMetricValues(
                     generateFinishMetrics(
                             currTime,
-                            ((ElasticsearchException) exception).status().getStatus(),
+                            ((OpenSearchException) exception).status().getStatus(),
                             exception.getClass().getName()),
                     currTime,
                     type.toString(),

@@ -35,7 +35,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.cluster.service.MasterService;
 import org.opensearch.cluster.service.SourcePrioritizedRunnable;
-import org.opensearch.common.util.concurrent.PrioritizedEsThreadPoolExecutor;
+import org.opensearch.common.util.concurrent.PrioritizedOpenSearchThreadPoolExecutor;
 
 @SuppressWarnings("unchecked")
 public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollector
@@ -48,7 +48,7 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
     private StringBuilder value;
     private static final int TPEXECUTOR_ADD_PENDING_PARAM_COUNT = 3;
     private Queue<Runnable> masterServiceCurrentQueue;
-    private PrioritizedEsThreadPoolExecutor prioritizedEsThreadPoolExecutor;
+    private PrioritizedOpenSearchThreadPoolExecutor prioritizedOpenSearchThreadPoolExecutor;
     private HashSet<Object> masterServiceWorkers;
     private long currentThreadId;
     private Object currentWorker;
@@ -59,7 +59,7 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
         super(SAMPLING_TIME_INTERVAL, "MasterServiceEventMetrics");
         masterServiceCurrentQueue = null;
         masterServiceWorkers = null;
-        prioritizedEsThreadPoolExecutor = null;
+        prioritizedOpenSearchThreadPoolExecutor = null;
         currentWorker = null;
         currentThreadId = -1;
         lastTaskInsertionOrder = -1;
@@ -98,7 +98,7 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
                 return;
             }
 
-            List<PrioritizedEsThreadPoolExecutor.Pending> pending = new ArrayList<>();
+            List<PrioritizedOpenSearchThreadPoolExecutor.Pending> pending = new ArrayList<>();
 
             Object[] parameters = new Object[TPEXECUTOR_ADD_PENDING_PARAM_COUNT];
             parameters[0] = new ArrayList<>(current);
@@ -106,10 +106,10 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
             parameters[2] = true;
 
             getPrioritizedTPExecutorAddPendingMethod()
-                    .invoke(prioritizedEsThreadPoolExecutor, parameters);
+                    .invoke(prioritizedOpenSearchThreadPoolExecutor, parameters);
 
             if (pending.size() != 0) {
-                PrioritizedEsThreadPoolExecutor.Pending firstPending = pending.get(0);
+                PrioritizedOpenSearchThreadPoolExecutor.Pending firstPending = pending.get(0);
 
                 if (lastTaskInsertionOrder != firstPending.insertionOrder) {
                     generateFinishMetrics(startTime);
@@ -194,7 +194,7 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
 
     // - Separated to have a unit test; and catch any code changes around this field
     Field getPrioritizedTPExecutorCurrentField() throws Exception {
-        Field currentField = PrioritizedEsThreadPoolExecutor.class.getDeclaredField("current");
+        Field currentField = PrioritizedOpenSearchThreadPoolExecutor.class.getDeclaredField("current");
         currentField.setAccessible(true);
         return currentField;
     }
@@ -213,7 +213,7 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
         classArray[1] = List.class;
         classArray[2] = boolean.class;
         Method addPendingMethod =
-                PrioritizedEsThreadPoolExecutor.class.getDeclaredMethod("addPending", classArray);
+                PrioritizedOpenSearchThreadPoolExecutor.class.getDeclaredMethod("addPending", classArray);
         addPendingMethod.setAccessible(true);
         return addPendingMethod;
     }
@@ -225,17 +225,17 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
                         OpenSearchResources.INSTANCE.getClusterService().getMasterService();
 
                 if (masterService != null) {
-                    if (prioritizedEsThreadPoolExecutor == null) {
-                        prioritizedEsThreadPoolExecutor =
-                                (PrioritizedEsThreadPoolExecutor)
+                    if (prioritizedOpenSearchThreadPoolExecutor == null) {
+                        prioritizedOpenSearchThreadPoolExecutor =
+                                (PrioritizedOpenSearchThreadPoolExecutor)
                                         getMasterServiceTPExecutorField().get(masterService);
                     }
 
-                    if (prioritizedEsThreadPoolExecutor != null) {
+                    if (prioritizedOpenSearchThreadPoolExecutor != null) {
                         masterServiceCurrentQueue =
                                 (Queue<Runnable>)
                                         getPrioritizedTPExecutorCurrentField()
-                                                .get(prioritizedEsThreadPoolExecutor);
+                                                .get(prioritizedOpenSearchThreadPoolExecutor);
                     } else {
                         StatsCollector.instance().logMetric(MASTER_NODE_NOT_UP_METRIC);
                     }
@@ -253,16 +253,16 @@ public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollect
                         OpenSearchResources.INSTANCE.getClusterService().getMasterService();
 
                 if (masterService != null) {
-                    if (prioritizedEsThreadPoolExecutor == null) {
-                        prioritizedEsThreadPoolExecutor =
-                                (PrioritizedEsThreadPoolExecutor)
+                    if (prioritizedOpenSearchThreadPoolExecutor == null) {
+                        prioritizedOpenSearchThreadPoolExecutor =
+                                (PrioritizedOpenSearchThreadPoolExecutor)
                                         getMasterServiceTPExecutorField().get(masterService);
                     }
 
                     masterServiceWorkers =
                             (HashSet<Object>)
                                     getTPExecutorWorkersField()
-                                            .get(prioritizedEsThreadPoolExecutor);
+                                            .get(prioritizedOpenSearchThreadPoolExecutor);
                 }
             }
         }

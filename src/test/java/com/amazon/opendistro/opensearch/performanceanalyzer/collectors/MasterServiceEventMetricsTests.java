@@ -31,7 +31,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.opensearch.cluster.service.ClusterService;
 import org.opensearch.cluster.service.SourcePrioritizedRunnable;
 import org.opensearch.common.Priority;
-import org.opensearch.common.util.concurrent.PrioritizedEsThreadPoolExecutor;
+import org.opensearch.common.util.concurrent.PrioritizedOpenSearchThreadPoolExecutor;
 import org.opensearch.test.ClusterServiceUtils;
 import org.opensearch.threadpool.TestThreadPool;
 import org.opensearch.threadpool.ThreadPool;
@@ -118,8 +118,8 @@ public class MasterServiceEventMetricsTests {
 
     @Test
     public void testCollectMetrics() throws Exception {
-        PrioritizedEsThreadPoolExecutor prioritizedEsThreadPoolExecutor =
-                (PrioritizedEsThreadPoolExecutor)
+        PrioritizedOpenSearchThreadPoolExecutor prioritizedOpenSearchThreadPoolExecutor =
+                (PrioritizedOpenSearchThreadPoolExecutor)
                         masterServiceEventMetrics
                                 .getMasterServiceTPExecutorField()
                                 .get(OpenSearchResources.INSTANCE.getClusterService().getMasterService());
@@ -134,7 +134,7 @@ public class MasterServiceEventMetricsTests {
                     }
                 };
 
-        prioritizedEsThreadPoolExecutor.submit(runnable);
+        prioritizedOpenSearchThreadPoolExecutor.submit(runnable);
         Thread.sleep(1L); // don't delete it
 
         masterServiceEventMetrics.collectMetrics(startTimeInMills);

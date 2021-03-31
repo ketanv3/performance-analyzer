@@ -24,7 +24,7 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceA
 import com.amazon.opendistro.opensearch.performanceanalyzer.reader_writer_shared.Event;
 import com.amazon.opendistro.opensearch.performanceanalyzer.util.TestUtil;
 import java.util.List;
-import org.opensearch.ElasticsearchException;
+import org.opensearch.OpenSearchException;
 import org.opensearch.action.ActionListener;
 import org.opensearch.action.ActionResponse;
 import org.opensearch.action.bulk.BulkResponse;
@@ -90,14 +90,14 @@ public class PerformanceAnalyzerActionListenerTests {
     }
 
     @Test
-    public void testOnFailureWithElasticsearchException() {
-        ElasticsearchException exception = Mockito.mock(ElasticsearchException.class);
+    public void testOnFailureWithOpenSearchException() {
+        OpenSearchException exception = Mockito.mock(OpenSearchException.class);
         Mockito.when(exception.status()).thenReturn(RestStatus.INTERNAL_SERVER_ERROR);
         actionListener.set(RequestType.search, listenerId, originalActionListener);
         actionListener.onFailure(exception);
         String[] metricsValues = readMetricsValue();
         assertEquals("HTTPRespCode:500", metricsValues[2]);
-        assertTrue(metricsValues[3].contains("Exception:org.elasticsearch.ElasticsearchException"));
+        assertTrue(metricsValues[3].contains("Exception:org.opensearch.OpenSearchException"));
     }
 
     @Test

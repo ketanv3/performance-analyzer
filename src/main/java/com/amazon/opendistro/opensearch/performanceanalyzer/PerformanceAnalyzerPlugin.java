@@ -314,7 +314,7 @@ public final class PerformanceAnalyzerPlugin extends Plugin
     }
 
     @Override
-    public List<org.elasticsearch.rest.RestHandler> getRestHandlers(
+    public List<org.opensearch.rest.RestHandler> getRestHandlers(
             final Settings settings,
             final RestController restController,
             final ClusterSettings clusterSettings,
