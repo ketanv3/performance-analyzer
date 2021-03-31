@@ -23,8 +23,8 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import org.apache.http.HttpStatus;
 import org.apache.http.util.EntityUtils;
-import org.elasticsearch.client.Request;
-import org.elasticsearch.client.Response;
+import org.opensearch.client.Request;
+import org.opensearch.client.Response;
 import org.junit.Assert;
 import org.junit.Test;
 

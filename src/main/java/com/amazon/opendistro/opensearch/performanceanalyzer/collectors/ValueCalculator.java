@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 
-import org.elasticsearch.action.admin.indices.stats.ShardStats;
+import org.opensearch.action.admin.indices.stats.ShardStats;
 
 @FunctionalInterface
 interface ValueCalculator {

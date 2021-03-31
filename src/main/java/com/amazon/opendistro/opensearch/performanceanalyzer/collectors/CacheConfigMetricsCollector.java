@@ -31,8 +31,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.elasticsearch.common.cache.Cache;
-import org.elasticsearch.indices.IndicesService;
+import org.opensearch.common.cache.Cache;
+import org.opensearch.indices.IndicesService;
 
 /*
  * Unlike Cache Hit, Miss, Eviction Count and Size, which is tracked on a per shard basis,

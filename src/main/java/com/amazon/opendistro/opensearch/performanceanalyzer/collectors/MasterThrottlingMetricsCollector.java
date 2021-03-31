@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.lang.reflect.Method;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.cluster.service.MasterService;
+import org.opensearch.cluster.service.MasterService;
 
 public class MasterThrottlingMetricsCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {

@@ -36,7 +36,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.cluster.service.ClusterApplierService;
+import org.opensearch.cluster.service.ClusterApplierService;
 
 public class ClusterApplierServiceStatsCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {

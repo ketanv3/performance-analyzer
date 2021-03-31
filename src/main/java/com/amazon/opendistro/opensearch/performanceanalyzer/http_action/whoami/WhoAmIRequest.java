@@ -16,8 +16,8 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.http_action.whoami;
 
 
-import org.elasticsearch.action.support.nodes.BaseNodesRequest;
-import org.elasticsearch.common.io.stream.StreamInput;
+import org.opensearch.action.support.nodes.BaseNodesRequest;
+import org.opensearch.common.io.stream.StreamInput;
 
 public class WhoAmIRequest extends BaseNodesRequest<WhoAmIRequest> {
 

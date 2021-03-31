@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.HttpStatus;
 import org.apache.http.util.EntityUtils;
-import org.elasticsearch.client.Request;
-import org.elasticsearch.client.Response;
+import org.opensearch.client.Request;
+import org.opensearch.client.Response;
 import org.junit.Assert;
 
 public class MetricCollectorIntegTestBase extends PerformanceAnalyzerIntegTestBase {

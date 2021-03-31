@@ -22,7 +22,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.ScheduledMetricCollectorsExecutor;
 import java.nio.file.Paths;
-import org.elasticsearch.common.settings.Settings;
+import org.opensearch.common.settings.Settings;
 import org.junit.Before;
 import org.junit.Test;
 

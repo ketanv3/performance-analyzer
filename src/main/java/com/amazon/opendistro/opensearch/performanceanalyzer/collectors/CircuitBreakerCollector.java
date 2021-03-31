@@ -23,7 +23,7 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfi
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsProcessor;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceAnalyzerMetrics;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.elasticsearch.indices.breaker.CircuitBreakerStats;
+import org.opensearch.indices.breaker.CircuitBreakerStats;
 
 public class CircuitBreakerCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {

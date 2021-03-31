@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.config.setting;
 
 
-import org.elasticsearch.common.settings.Setting;
+import org.opensearch.common.settings.Setting;
 
 public final class PerformanceAnalyzerClusterSettings {
     /**

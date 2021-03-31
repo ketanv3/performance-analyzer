@@ -32,9 +32,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.common.util.concurrent.SizeBlockingQueue;
-import org.elasticsearch.threadpool.ThreadPool;
-import org.elasticsearch.threadpool.ThreadPoolStats.Stats;
+import org.opensearch.common.util.concurrent.SizeBlockingQueue;
+import org.opensearch.threadpool.ThreadPool;
+import org.opensearch.threadpool.ThreadPoolStats.Stats;
 
 public class ThreadPoolMetricsCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {

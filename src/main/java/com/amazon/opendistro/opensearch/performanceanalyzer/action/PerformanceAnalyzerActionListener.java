@@ -20,10 +20,10 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.H
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.HttpMetric;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsProcessor;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceAnalyzerMetrics;
-import org.elasticsearch.ElasticsearchException;
-import org.elasticsearch.action.ActionListener;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.search.SearchResponse;
+import org.opensearch.ElasticsearchException;
+import org.opensearch.action.ActionListener;
+import org.opensearch.action.bulk.BulkResponse;
+import org.opensearch.action.search.SearchResponse;
 
 public class PerformanceAnalyzerActionListener<Response>
         implements ActionListener<Response>, MetricsProcessor {

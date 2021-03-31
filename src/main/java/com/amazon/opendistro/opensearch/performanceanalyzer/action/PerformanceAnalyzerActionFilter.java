@@ -21,15 +21,15 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceA
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.action.ActionListener;
-import org.elasticsearch.action.ActionRequest;
-import org.elasticsearch.action.ActionResponse;
-import org.elasticsearch.action.bulk.BulkRequest;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.support.ActionFilter;
-import org.elasticsearch.action.support.ActionFilterChain;
-import org.elasticsearch.common.inject.Inject;
-import org.elasticsearch.tasks.Task;
+import org.opensearch.action.ActionListener;
+import org.opensearch.action.ActionRequest;
+import org.opensearch.action.ActionResponse;
+import org.opensearch.action.bulk.BulkRequest;
+import org.opensearch.action.search.SearchRequest;
+import org.opensearch.action.support.ActionFilter;
+import org.opensearch.action.support.ActionFilterChain;
+import org.opensearch.common.inject.Inject;
+import org.opensearch.tasks.Task;
 
 public class PerformanceAnalyzerActionFilter implements ActionFilter {
     private static final Logger LOG = LogManager.getLogger(PerformanceAnalyzerActionFilter.class);

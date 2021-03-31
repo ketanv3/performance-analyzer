@@ -16,13 +16,13 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer;
 
 
-import org.elasticsearch.client.Client;
-import org.elasticsearch.cluster.service.ClusterService;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.env.Environment;
-import org.elasticsearch.indices.IndicesService;
-import org.elasticsearch.indices.breaker.CircuitBreakerService;
-import org.elasticsearch.threadpool.ThreadPool;
+import org.opensearch.client.Client;
+import org.opensearch.cluster.service.ClusterService;
+import org.opensearch.common.settings.Settings;
+import org.opensearch.env.Environment;
+import org.opensearch.indices.IndicesService;
+import org.opensearch.indices.breaker.CircuitBreakerService;
+import org.opensearch.threadpool.ThreadPool;
 
 public final class OpenSearchResources {
     public static final OpenSearchResources INSTANCE = new OpenSearchResources();

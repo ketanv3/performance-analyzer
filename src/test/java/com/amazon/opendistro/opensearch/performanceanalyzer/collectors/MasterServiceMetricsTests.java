@@ -30,10 +30,10 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceA
 import com.amazon.opendistro.opensearch.performanceanalyzer.reader_writer_shared.Event;
 import com.amazon.opendistro.opensearch.performanceanalyzer.util.TestUtil;
 import java.util.List;
-import org.elasticsearch.cluster.service.ClusterService;
-import org.elasticsearch.test.ClusterServiceUtils;
-import org.elasticsearch.threadpool.TestThreadPool;
-import org.elasticsearch.threadpool.ThreadPool;
+import org.opensearch.cluster.service.ClusterService;
+import org.opensearch.test.ClusterServiceUtils;
+import org.opensearch.threadpool.TestThreadPool;
+import org.opensearch.threadpool.ThreadPool;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

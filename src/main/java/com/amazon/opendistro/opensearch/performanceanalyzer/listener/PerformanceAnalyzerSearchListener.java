@@ -26,8 +26,8 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceA
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.ThreadIDUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.index.shard.SearchOperationListener;
-import org.elasticsearch.search.internal.SearchContext;
+import org.opensearch.index.shard.SearchOperationListener;
+import org.opensearch.search.internal.SearchContext;
 
 public class PerformanceAnalyzerSearchListener
         implements SearchOperationListener, SearchListener, MetricsProcessor {

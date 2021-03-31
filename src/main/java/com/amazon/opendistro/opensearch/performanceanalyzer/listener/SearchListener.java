@@ -16,7 +16,7 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.listener;
 
 
-import org.elasticsearch.search.internal.SearchContext;
+import org.opensearch.search.internal.SearchContext;
 
 interface SearchListener {
     default void preQueryPhase(SearchContext searchContext) {}

@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.cluster.node.DiscoveryNode;
-import org.elasticsearch.cluster.node.DiscoveryNodes;
+import org.opensearch.cluster.node.DiscoveryNode;
+import org.opensearch.cluster.node.DiscoveryNodes;
 
 public class NodeDetailsCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {

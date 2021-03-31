@@ -21,8 +21,8 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.io.IOException;
 import org.apache.commons.lang3.SystemUtils;
-import org.elasticsearch.transport.TransportChannel;
-import org.elasticsearch.transport.TransportResponse;
+import org.opensearch.transport.TransportChannel;
+import org.opensearch.transport.TransportResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

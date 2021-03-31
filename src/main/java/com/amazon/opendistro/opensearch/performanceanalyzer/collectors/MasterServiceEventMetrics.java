@@ -33,9 +33,9 @@ import java.util.Queue;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.cluster.service.MasterService;
-import org.elasticsearch.cluster.service.SourcePrioritizedRunnable;
-import org.elasticsearch.common.util.concurrent.PrioritizedEsThreadPoolExecutor;
+import org.opensearch.cluster.service.MasterService;
+import org.opensearch.cluster.service.SourcePrioritizedRunnable;
+import org.opensearch.common.util.concurrent.PrioritizedEsThreadPoolExecutor;
 
 @SuppressWarnings("unchecked")
 public class MasterServiceEventMetrics extends PerformanceAnalyzerMetricsCollector

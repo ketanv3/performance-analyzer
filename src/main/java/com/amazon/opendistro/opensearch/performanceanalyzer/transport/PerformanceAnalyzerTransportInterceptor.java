@@ -19,9 +19,9 @@ package com.amazon.opendistro.opensearch.performanceanalyzer.transport;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.elasticsearch.transport.TransportInterceptor;
-import org.elasticsearch.transport.TransportRequest;
-import org.elasticsearch.transport.TransportRequestHandler;
+import org.opensearch.transport.TransportInterceptor;
+import org.opensearch.transport.TransportRequest;
+import org.opensearch.transport.TransportRequestHandler;
 
 public class PerformanceAnalyzerTransportInterceptor implements TransportInterceptor {
 

@@ -26,8 +26,8 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceA
 import com.amazon.opendistro.opensearch.performanceanalyzer.reader_writer_shared.Event;
 import com.amazon.opendistro.opensearch.performanceanalyzer.util.TestUtil;
 import java.util.List;
-import org.elasticsearch.indices.IndicesService;
-import org.elasticsearch.test.ESSingleNodeTestCase;
+import org.opensearch.indices.IndicesService;
+import org.opensearch.test.ESSingleNodeTestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

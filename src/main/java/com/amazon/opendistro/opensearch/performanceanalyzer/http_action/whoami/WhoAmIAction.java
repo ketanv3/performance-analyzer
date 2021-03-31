@@ -16,8 +16,8 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.http_action.whoami;
 
 
-import org.elasticsearch.action.ActionType;
-import org.elasticsearch.common.io.stream.Writeable;
+import org.opensearch.action.ActionType;
+import org.opensearch.common.io.stream.Writeable;
 
 public class WhoAmIAction extends ActionType<WhoAmIResponse> {
 

@@ -16,9 +16,9 @@
 package com.amazon.opendistro.opensearch.performanceanalyzer.http_action.whoami;
 
 
-import org.elasticsearch.action.ActionRequestBuilder;
-import org.elasticsearch.client.ClusterAdminClient;
-import org.elasticsearch.client.ElasticsearchClient;
+import org.opensearch.action.ActionRequestBuilder;
+import org.opensearch.client.ClusterAdminClient;
+import org.opensearch.client.ElasticsearchClient;
 
 public class WhoAmIRequestBuilder extends ActionRequestBuilder<WhoAmIRequest, WhoAmIResponse> {
     public WhoAmIRequestBuilder(final ClusterAdminClient client) {
