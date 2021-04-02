@@ -210,7 +210,9 @@ dependencies {
     configurations {
         // jarHell reports class name conflicts between securemock and mockito-core
         // has to disable one of them.
-        all*.exclude group: "org.opensearch", module: "securemock"
+        // Need to continue exclude this group until we figure out how to get rid of
+        // this exclusion with opensearch
+        all*.exclude group: "org.elasticsearch", module: "securemock"
     }
 
     configurations.all {
