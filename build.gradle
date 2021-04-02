@@ -16,7 +16,7 @@
 buildscript {
 
     ext {
-        es_version = System.getProperty("es.version", "7.10.3-SNAPSHOT")
+        opensearch_version = System.getProperty("opensearch.version", "7.10.3")
     }
     // This isn't applying from repositories.gradle so repeating it here
     repositories {
@@ -25,7 +25,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.opensearch.gradle:build-tools:${es_version}"
+        classpath "org.opensearch.gradle:build-tools:${opensearch_version}"
         classpath 'org.ajoberstar:gradle-git:0.2.3'
     }
 }
