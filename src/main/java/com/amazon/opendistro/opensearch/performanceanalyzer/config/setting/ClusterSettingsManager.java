@@ -233,7 +233,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
             }
         } catch (Exception ex) {
             LOG.error(ex);
-            StatsCollector.instance().logException(StatExceptionCode.ES_REQUEST_INTERCEPTOR_ERROR);
+            StatsCollector.instance().logException(StatExceptionCode.OPENSEARCH_REQUEST_INTERCEPTOR_ERROR);
         }
     }
 
@@ -254,7 +254,7 @@ public class ClusterSettingsManager implements ClusterStateListener {
             }
         } catch (Exception ex) {
             LOG.error(ex);
-            StatsCollector.instance().logException(StatExceptionCode.ES_REQUEST_INTERCEPTOR_ERROR);
+            StatsCollector.instance().logException(StatExceptionCode.OPENSEARCH_REQUEST_INTERCEPTOR_ERROR);
         }
     }
     /** Class that handles response to GET /_cluster/settings */

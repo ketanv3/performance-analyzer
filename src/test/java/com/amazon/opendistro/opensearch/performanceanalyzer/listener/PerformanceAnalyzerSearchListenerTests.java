@@ -45,7 +45,7 @@ import org.mockito.Mockito;
 public class PerformanceAnalyzerSearchListenerTests {
     private static final long TOOK_IN_NANOS = 10;
     private static final String EXCEPTION =
-            StatExceptionCode.ES_REQUEST_INTERCEPTOR_ERROR.toString();
+            StatExceptionCode.OPENSEARCH_REQUEST_INTERCEPTOR_ERROR.toString();
 
     private PerformanceAnalyzerSearchListener searchListener;
     private StatsCollector statsCollector;
