@@ -376,7 +376,7 @@ bundlePlugin {
 }
 
 /**
- * setupESCluster spins up a local 2 node ES cluster using the enableRca task in the performance-analyzer-rca
+ * setupOpenSearchCluster spins up a local 2 node OpenSearch cluster using the enableRca task in the performance-analyzer-rca
  * repo. The performance-analyzer-rca repo is cloned as part of the cloneGitRepo task.
  */
 task setupOpenSearchCluster() {
