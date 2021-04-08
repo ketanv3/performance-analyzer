@@ -376,7 +376,7 @@ bundlePlugin {
 }
 
 /**
- * setupESCluster spins up a local 2 node ES cluster using the enableRca task in the performance-analyzer-rca
+ * setupOpenSearchCluster spins up a local 2 node OpenSearch cluster using the enableRca task in the performance-analyzer-rca
  * repo. The performance-analyzer-rca repo is cloned as part of the cloneGitRepo task.
  */
 task setupOpenSearchCluster() {
@@ -422,7 +422,7 @@ task integTest(type: RestIntegTestTask) {
         propEnabled("tests.enableIT")
     }
     if (propEnabled("tests.useDockerCluster")) {
-        dependsOn(setupEsCluster)
+        dependsOn(setupOpenSearchCluster)
     }
     systemProperty 'tests.security.manager', 'false'
     description = "Run integration tests against integTest cluster"
