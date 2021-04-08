@@ -422,7 +422,7 @@ task integTest(type: RestIntegTestTask) {
         propEnabled("tests.enableIT")
     }
     if (propEnabled("tests.useDockerCluster")) {
-        dependsOn(setupEsCluster)
+        dependsOn(setupOpenSearchCluster)
     }
     systemProperty 'tests.security.manager', 'false'
     description = "Run integration tests against integTest cluster"
