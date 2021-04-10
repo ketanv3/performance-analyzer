@@ -35,8 +35,9 @@ import org.junit.Test;
 public class HeapMetricsIT extends MetricCollectorIntegTestBase {
 
     private static final Logger LOG = LogManager.getLogger(HeapMetricsIT.class);
-    private double MIN_HEAP = 50 * 1024 * 1024; // 50 MB
-    private double MAX_HEAP = 2 * 1024 * 1024 * 1024; // 2 GB
+    private double MIN_HEAP_IN_MB = 50; // 50 MB
+    private double MAX_HEAP_IN_MB = 2 * 1024; // 2 GB
+    private double BYTES_TO_MB = 1024 * 1024;
 
     @Before
     public void init() throws Exception {
@@ -45,17 +46,17 @@ public class HeapMetricsIT extends MetricCollectorIntegTestBase {
 
     @Test
     public void checkHeapInit() throws Exception {
-        checkHeapMetric(AllMetrics.HeapValue.HEAP_INIT, (d) -> d >= MIN_HEAP && d <= MAX_HEAP);
+        checkHeapMetric(AllMetrics.HeapValue.HEAP_INIT, (d) -> d >= MIN_HEAP_IN_MB && d <= MAX_HEAP_IN_MB);
     }
 
     @Test
     public void checkHeapMax() throws Exception {
-        checkHeapMetric(AllMetrics.HeapValue.HEAP_MAX, (d) -> d >= MIN_HEAP && d <= MAX_HEAP);
+        checkHeapMetric(AllMetrics.HeapValue.HEAP_MAX, (d) -> d >= MIN_HEAP_IN_MB && d <= MAX_HEAP_IN_MB);
     }
 
     @Test
     public void checkHeapUsed() throws Exception {
-        checkHeapMetric(AllMetrics.HeapValue.HEAP_USED, (d) -> d >= MIN_HEAP && d <= MAX_HEAP);
+        checkHeapMetric(AllMetrics.HeapValue.HEAP_USED, (d) -> d >= MIN_HEAP_IN_MB && d <= MAX_HEAP_IN_MB);
     }
 
     private void checkHeapMetric(AllMetrics.HeapValue metric, DoublePredicate metricValidator)
@@ -96,8 +97,8 @@ public class HeapMetricsIT extends MetricCollectorIntegTestBase {
         Assert.assertEquals(
                 JsonResponseField.Type.Constants.DOUBLE, responseData.getField(0).getType());
         Assert.assertEquals(1, responseData.getRecordSize());
-        Double metricValue = responseData.getRecordAsDouble(0, metric.toString());
-        LOG.info("{}} value is {}", metric.toString(), metricValue);
+        Double metricValue = responseData.getRecordAsDouble(0, metric.toString())/BYTES_TO_MB;
+        LOG.info("{} value is {}", metric.toString(), metricValue);
         Assert.assertTrue(metricValidator.test(metricValue));
     }
 }
