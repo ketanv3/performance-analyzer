@@ -389,7 +389,7 @@ task setupOpenSearchCluster() {
             workingDir(rcaDir)
             commandLine './gradlew', 'enableRca'
         }
-        sleep(5000)
+        sleep(30000)
     }
 }
 
