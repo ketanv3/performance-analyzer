@@ -18,12 +18,18 @@ package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
 import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.MasterPendingValue;
+import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.MasterPendingTaskDimension;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsProcessor;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceAnalyzerMetrics;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import org.opensearch.cluster.service.PendingClusterTask;
+import java.util.HashMap;
+import java.util.List;
+
 
 @SuppressWarnings("unchecked")
 public class MasterServiceMetrics extends PerformanceAnalyzerMetricsCollector
@@ -59,22 +65,36 @@ public class MasterServiceMetrics extends PerformanceAnalyzerMetricsCollector
                 return;
             }
 
+            /*
+            pendingTasks API returns object of PendingClusterTask which contains insertOrder, priority, source, timeInQueue.
+                Example :
+                     insertOrder: 101,
+                     priority: "URGENT",
+                     source: "create-index [foo_9], cause [api]",
+                     timeIn_queue: "86ms"
+             */
+
+            List<PendingClusterTask> pendingTasks = OpenSearchResources.INSTANCE.getClusterService().getMasterService()
+                    .pendingTasks();
+            HashMap<String,Integer> pendingTaskCountPerTaskType = new HashMap<>();
+
+            pendingTasks.stream().forEach( pendingTask -> {
+                String pendingTaskType = pendingTask.getSource().toString().split(" ",2)[0];
+                pendingTaskCountPerTaskType.put(pendingTaskType,
+                        pendingTaskCountPerTaskType.getOrDefault(pendingTaskType,0)+1);
+            });
+
             value.setLength(0);
-            value.append(PerformanceAnalyzerMetrics.getJsonCurrentMilliSeconds())
-                    .append(PerformanceAnalyzerMetrics.sMetricNewLineDelimitor);
-            value.append(
-                    new MasterPendingStatus(
-                                    OpenSearchResources.INSTANCE
-                                            .getClusterService()
-                                            .getMasterService()
-                                            .numberOfPendingTasks())
-                            .serialize());
+            value.append(PerformanceAnalyzerMetrics.getJsonCurrentMilliSeconds());
+            pendingTaskCountPerTaskType.forEach((pendingTaskType, PendingTaskValue) -> {
+                value.append(PerformanceAnalyzerMetrics.sMetricNewLineDelimitor);
+                value.append(new MasterPendingStatus(pendingTaskType, PendingTaskValue).serialize());
+            });
             saveMetricValues(
                     value.toString(),
                     startTime,
                     PerformanceAnalyzerMetrics.MASTER_CURRENT,
                     PerformanceAnalyzerMetrics.MASTER_META_DATA);
-
         } catch (Exception ex) {
             LOG.debug(
                     "Exception in Collecting Master Metrics: {} for startTime {}",
@@ -84,10 +104,17 @@ public class MasterServiceMetrics extends PerformanceAnalyzerMetricsCollector
     }
 
     public static class MasterPendingStatus extends MetricStatus {
+        private final String pendingTaskType;
         private final int pendingTasksCount;
 
-        public MasterPendingStatus(int pendingTasksCount) {
+        public MasterPendingStatus(String pendingTaskType, int pendingTasksCount) {
+            this.pendingTaskType = pendingTaskType;
             this.pendingTasksCount = pendingTasksCount;
+        }
+
+        @JsonProperty(MasterPendingTaskDimension.Constants.PENDING_TASK_TYPE)
+        public String getMasterTaskType(){
+            return pendingTaskType;
         }
 
         @JsonProperty(MasterPendingValue.Constants.PENDING_TASKS_COUNT_VALUE)

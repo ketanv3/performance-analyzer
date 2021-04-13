@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -15,13 +15,17 @@
 
 package com.amazon.opendistro.opensearch.performanceanalyzer.collectors;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import com.amazon.opendistro.opensearch.performanceanalyzer.OpenSearchResources;
+import com.amazon.opendistro.opensearch.performanceanalyzer.config.PerformanceAnalyzerController;
 import com.amazon.opendistro.opensearch.performanceanalyzer.config.PluginSettings;
-import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.MasterPendingValue;
+import com.amazon.opendistro.opensearch.performanceanalyzer.config.overrides.ConfigOverridesWrapper;
+import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.AllMetrics.ElectionTermValue;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.MetricsConfiguration;
 import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceAnalyzerMetrics;
 import com.amazon.opendistro.opensearch.performanceanalyzer.reader_writer_shared.Event;
@@ -35,13 +39,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
-public class MasterServiceMetricsTests {
-    private MasterServiceMetrics masterServiceMetrics;
+public class ElectionTermCollectorTests {
+    private ElectionTermCollector electionTermCollector;
     private long startTimeInMills = 1153721339;
     private ThreadPool threadPool;
+    private PerformanceAnalyzerController controller;
+    private ConfigOverridesWrapper configOverrides;
 
-    @Mock private ClusterService mockedClusterService;
+    @Mock
+    private ClusterService mockedClusterService;
 
     @Before
     public void init() {
@@ -50,12 +58,13 @@ public class MasterServiceMetricsTests {
         threadPool = new TestThreadPool("test");
         ClusterService clusterService = ClusterServiceUtils.createClusterService(threadPool);
         OpenSearchResources.INSTANCE.setClusterService(clusterService);
+        controller = Mockito.mock(PerformanceAnalyzerController.class);
+        configOverrides = Mockito.mock(ConfigOverridesWrapper.class);
 
-        MetricsConfiguration.CONFIG_MAP.put(
-                MasterServiceMetrics.class, MetricsConfiguration.cdefault);
-        masterServiceMetrics = new MasterServiceMetrics();
+        MetricsConfiguration.CONFIG_MAP.put(ElectionTermCollector.class, MetricsConfiguration.cdefault);
+        electionTermCollector = new ElectionTermCollector(controller,configOverrides);
 
-        // clean metricQueue before running every test
+        //clean metricQueue before running every test
         TestUtil.readEvents();
     }
 
@@ -65,51 +74,39 @@ public class MasterServiceMetricsTests {
     }
 
     @Test
-    public void testGetMetricsPath() {
-        String expectedPath =
-                PluginSettings.instance().getMetricsLocation()
-                        + PerformanceAnalyzerMetrics.getTimeInterval(startTimeInMills)
-                        + "/"
-                        + PerformanceAnalyzerMetrics.sPendingTasksPath
-                        + "/"
-                        + "current"
-                        + "/"
-                        + PerformanceAnalyzerMetrics.FINISH_FILE_NAME;
-        String actualPath =
-                masterServiceMetrics.getMetricsPath(
-                        startTimeInMills, "current", PerformanceAnalyzerMetrics.FINISH_FILE_NAME);
-        assertEquals(expectedPath, actualPath);
+    public void testGetMetricPath() {
+        String expectedPath = PluginSettings.instance().getMetricsLocation()
+                + PerformanceAnalyzerMetrics.getTimeInterval(startTimeInMills) + "/"
+                + PerformanceAnalyzerMetrics.sElectionTermPath;
+        String actualPath = electionTermCollector.getMetricsPath(startTimeInMills);
+        assertEquals(expectedPath,actualPath);
 
         try {
-            masterServiceMetrics.getMetricsPath(startTimeInMills, "current");
+            electionTermCollector.getMetricsPath(startTimeInMills,"current");
             fail("Negative scenario test: Should have been a RuntimeException");
-        } catch (RuntimeException ex) {
-            // - expecting exception...1 values passed; 2 expected
+        } catch (RuntimeException ex){
+            //- expecting exception...1 value passed; 0 expected
         }
     }
 
     @Test
     public void testCollectMetrics() {
-        masterServiceMetrics.collectMetrics(startTimeInMills);
+        electionTermCollector.collectMetrics(startTimeInMills);
         String jsonStr = readMetricsInJsonString(1);
-        assertFalse(jsonStr.contains(MasterPendingValue.Constants.PENDING_TASKS_COUNT_VALUE));
+        String[] jsonStrArray = jsonStr.split(":",2);
+        assertTrue(jsonStrArray[0].contains(ElectionTermValue.Constants.ELECTION_TERM_VALUE));
+        assertTrue(jsonStrArray[1].contains("0"));
     }
 
     @Test
     public void testWithMockClusterService() {
         OpenSearchResources.INSTANCE.setClusterService(mockedClusterService);
-        masterServiceMetrics.collectMetrics(startTimeInMills);
+        electionTermCollector.collectMetrics(startTimeInMills);
         String jsonStr = readMetricsInJsonString(0);
         assertNull(jsonStr);
 
-        OpenSearchResources.INSTANCE.setClusterService(mockedClusterService);
-        when(mockedClusterService.getMasterService()).thenThrow(new RuntimeException());
-        masterServiceMetrics.collectMetrics(startTimeInMills);
-        jsonStr = readMetricsInJsonString(0);
-        assertNull(jsonStr);
-
         OpenSearchResources.INSTANCE.setClusterService(null);
-        masterServiceMetrics.collectMetrics(startTimeInMills);
+        electionTermCollector.collectMetrics(startTimeInMills);
         jsonStr = readMetricsInJsonString(0);
         assertNull(jsonStr);
     }
@@ -119,10 +116,11 @@ public class MasterServiceMetricsTests {
         assert metrics.size() == size;
         if (size != 0) {
             String[] jsonStrs = metrics.get(0).value.split("\n");
-            assert jsonStrs.length == 1;
-            return jsonStrs[0];
+            assert jsonStrs.length == 2;
+            return jsonStrs[1];
         } else {
             return null;
         }
     }
 }
+

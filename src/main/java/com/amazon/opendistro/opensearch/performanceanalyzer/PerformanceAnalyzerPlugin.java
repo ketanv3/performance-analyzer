@@ -23,6 +23,7 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.CacheConf
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.CircuitBreakerCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.ClusterApplierServiceStatsCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.DisksCollector;
+import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.ElectionTermCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.FaultDetectionMetricsCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.GCInfoCollector;
 import com.amazon.opendistro.opensearch.performanceanalyzer.collectors.HeapMetricsCollector;
@@ -240,6 +241,9 @@ public final class PerformanceAnalyzerPlugin extends Plugin
                         performanceAnalyzerController, configOverridesWrapper));
         scheduledMetricCollectorsExecutor.addScheduledMetricCollector(
                 new AdmissionControlMetricsCollector());
+        scheduledMetricCollectorsExecutor.addScheduledMetricCollector(
+                new ElectionTermCollector(
+                        performanceAnalyzerController,configOverridesWrapper));
         try {
             Class.forName(ShardIndexingPressureMetricsCollector.SHARD_INDEXING_PRESSURE_CLASS_NAME);
             scheduledMetricCollectorsExecutor.addScheduledMetricCollector(
