@@ -1,6 +1,14 @@
-*Issue #, if available:*
+**Is your feature request related to a problem? Please provide an existing Issue # , or describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-*Description of changes:*
+**Describe the solution you are proposing**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
 
 Developer's Certificate of Origin 1.1
 
