@@ -31,15 +31,15 @@ import com.amazon.opendistro.opensearch.performanceanalyzer.metrics.PerformanceA
 import com.amazon.opendistro.opensearch.performanceanalyzer.reader_writer_shared.Event;
 import com.amazon.opendistro.opensearch.performanceanalyzer.util.TestUtil;
 import java.util.List;
-import org.opensearch.cluster.service.ClusterService;
-import org.opensearch.test.ClusterServiceUtils;
-import org.opensearch.threadpool.TestThreadPool;
-import org.opensearch.threadpool.ThreadPool;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.opensearch.cluster.service.ClusterService;
+import org.opensearch.test.ClusterServiceUtils;
+import org.opensearch.threadpool.TestThreadPool;
+import org.opensearch.threadpool.ThreadPool;
 
 public class ElectionTermCollectorTests {
     private ElectionTermCollector electionTermCollector;
@@ -48,8 +48,7 @@ public class ElectionTermCollectorTests {
     private PerformanceAnalyzerController controller;
     private ConfigOverridesWrapper configOverrides;
 
-    @Mock
-    private ClusterService mockedClusterService;
+    @Mock private ClusterService mockedClusterService;
 
     @Before
     public void init() {
@@ -61,10 +60,11 @@ public class ElectionTermCollectorTests {
         controller = Mockito.mock(PerformanceAnalyzerController.class);
         configOverrides = Mockito.mock(ConfigOverridesWrapper.class);
 
-        MetricsConfiguration.CONFIG_MAP.put(ElectionTermCollector.class, MetricsConfiguration.cdefault);
-        electionTermCollector = new ElectionTermCollector(controller,configOverrides);
+        MetricsConfiguration.CONFIG_MAP.put(
+                ElectionTermCollector.class, MetricsConfiguration.cdefault);
+        electionTermCollector = new ElectionTermCollector(controller, configOverrides);
 
-        //clean metricQueue before running every test
+        // clean metricQueue before running every test
         TestUtil.readEvents();
     }
 
@@ -75,25 +75,29 @@ public class ElectionTermCollectorTests {
 
     @Test
     public void testGetMetricPath() {
-        String expectedPath = PluginSettings.instance().getMetricsLocation()
-                + PerformanceAnalyzerMetrics.getTimeInterval(startTimeInMills) + "/"
-                + PerformanceAnalyzerMetrics.sElectionTermPath;
+        String expectedPath =
+                PluginSettings.instance().getMetricsLocation()
+                        + PerformanceAnalyzerMetrics.getTimeInterval(startTimeInMills)
+                        + "/"
+                        + PerformanceAnalyzerMetrics.sElectionTermPath;
         String actualPath = electionTermCollector.getMetricsPath(startTimeInMills);
-        assertEquals(expectedPath,actualPath);
+        assertEquals(expectedPath, actualPath);
 
         try {
-            electionTermCollector.getMetricsPath(startTimeInMills,"current");
+            electionTermCollector.getMetricsPath(startTimeInMills, "current");
             fail("Negative scenario test: Should have been a RuntimeException");
-        } catch (RuntimeException ex){
-            //- expecting exception...1 value passed; 0 expected
+        } catch (RuntimeException ex) {
+            // - expecting exception...1 value passed; 0 expected
         }
     }
 
     @Test
     public void testCollectMetrics() {
+        Mockito.when(controller.isCollectorEnabled(configOverrides, "ElectionTermCollector"))
+                .thenReturn(true);
         electionTermCollector.collectMetrics(startTimeInMills);
         String jsonStr = readMetricsInJsonString(1);
-        String[] jsonStrArray = jsonStr.split(":",2);
+        String[] jsonStrArray = jsonStr.split(":", 2);
         assertTrue(jsonStrArray[0].contains(ElectionTermValue.Constants.ELECTION_TERM_VALUE));
         assertTrue(jsonStrArray[1].contains("0"));
     }
@@ -123,4 +127,3 @@ public class ElectionTermCollectorTests {
         }
     }
 }
-
