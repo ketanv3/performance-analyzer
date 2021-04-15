@@ -315,7 +315,7 @@ static def propEnabled(property) {
 task cloneGitRepo(type: GitClone) {
     rcaDir = Paths.get(getProject().getBuildDir().toString(), "performance-analyzer-rca").toString()
     def destination = file(rcaDir)
-    uri = "https://github.com/opendistro-for-elasticsearch/performance-analyzer-rca.git"
+    uri = "https://github.com/opensearch-project/performance-analyzer-rca.git"
     branch = gitDefaultBranch
     destinationPath = destination
     bare = false
